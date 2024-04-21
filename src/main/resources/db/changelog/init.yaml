@@ -1,0 +1,22 @@
+databaseChangeLog:
+        - changeSet:
+            id: createTableContacts
+            author: Kukushkinaoyu
+            changes:
+              - createTable:
+                  tableName: contacts
+                  columns:
+                    - column:
+                        name: id
+                        type: BIGSERIAL
+                        constraints:
+                             primaryKey: true
+                    - column:
+                         name: firstname
+                         type: VARCHAR(255)
+                    - column:
+                         name: email
+                         type: VARCHAR(255)
+                    - column:
+                         name: tel
+                         type: VARCHAR(255)

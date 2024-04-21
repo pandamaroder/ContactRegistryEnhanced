@@ -16,7 +16,7 @@ public class ContactApiController {
 
     @GetMapping
     public String getAll(Model model) {
-        model.addAttribute("messages", contactService.getAll());
+        model.addAttribute("contacts", contactService.getAll());
         model.addAttribute("toSend", new Contact());
         return "contactForm";
     }

@@ -6,15 +6,27 @@
 </head>
 <body>
 <table>
-    <tr th:each="contact:${contacts}">
-        <td th:text="${contact.name}"></td>
-        <td th:text="${contact.tel}"></td>
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Почта</th>
     </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contact : ${contacts}">
+        <td th:text="${contact.firstname}"></td>
+        <td th:text="${contact.tel}"></td>
+        <td th:text="${contact.email}"></td>
+    </tr>
+    </tbody>
 </table>
 <form action="" method="post" th:object="${toSend}">
     <label>
-        Введите сообщение
-        <input type="text" maxlength="140" th:field="*{name}">
+        Введите данные контакта
+        <input type="text" maxlength="140" th:field="*{firstname}">
+        <input type="text" maxlength="140" th:field="*{tel}">
+        <input type="text" maxlength="140" th:field="*{email}">
     </label>
     <input type="submit" value="отправить">
 </form>

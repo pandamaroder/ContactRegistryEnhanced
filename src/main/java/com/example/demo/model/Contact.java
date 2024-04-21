@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Contact implements Serializable {
 
     private Long id;
-    private String firstName;
+    private String firstname;
 
     private String email;
     private String tel;
@@ -18,7 +18,7 @@ public class Contact implements Serializable {
     @Override
     public String toString() {
         return String.format("%-3d %-50s %-4d",
-                getId(), getFirstName(), getTel());
+                getId(), getFirstname(), getTel());
     }
 
 }
