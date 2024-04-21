@@ -7,10 +7,9 @@ spring:
     driverClassName: org.postgresql.Driver
     username: "habrpguser"
     password: "pgpwd4habr"
-
-
   liquibase:
-    enabled: true
-    change-log: classpath:/config/liquibase/master.xml
+    parameters:
+      clearCheckSums: true
+
 
 

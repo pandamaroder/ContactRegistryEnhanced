@@ -1,0 +1,20 @@
+databaseChangeLog:
+        - changeSet:
+            id: createTableContacts
+            author: Kukushkinaoyu
+            changes:
+              - insert:
+                  tableName: contacts
+                  columns:
+                    - column:
+                        name: id
+                        value: 1
+                    - column:
+                         name: firstname
+                         value: John
+                    - column:
+                         name: email
+                         value: john@example.com
+                    - column:
+                         name: tel
+                         value: +1234567890
