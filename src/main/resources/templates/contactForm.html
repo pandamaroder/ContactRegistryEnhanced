@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>STUDENT CONTACT FORM</title>
+</head>
+<body>
+<table>
+    <tr th:each="contact:${contacts}">
+        <td th:text="${contact.name}"></td>
+        <td th:text="${contact.tel}"></td>
+    </tr>
+</table>
+<form action="" method="post" th:object="${toSend}">
+    <label>
+        Введите сообщение
+        <input type="text" maxlength="140" th:field="*{name}">
+    </label>
+    <input type="submit" value="отправить">
+</form>
+</body>
+</html>
