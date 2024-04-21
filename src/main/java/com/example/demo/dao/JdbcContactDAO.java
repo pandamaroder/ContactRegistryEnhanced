@@ -26,6 +26,7 @@ class ContactRowMapper implements RowMapper<Contact> {
 }
 
 @RequiredArgsConstructor
+@Component
 public class JdbcContactDAO implements ContactDAO {
 
     private static final String SQL_SELECT_CONTACT =
