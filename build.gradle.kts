@@ -29,7 +29,7 @@ extra["springAiVersion"] = "0.8.1"
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-	//implementation("org.liquibase:liquibase-core")
+	implementation("org.liquibase:liquibase-core")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.postgresql:postgresql")
 	compileOnly("org.projectlombok:lombok")
