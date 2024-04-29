@@ -7,9 +7,6 @@ databaseChangeLog:
                   tableName: contacts
                   columns:
                     - column:
-                        name: id
-                        value: 1
-                    - column:
                          name: firstname
                          value: John
                     - column:

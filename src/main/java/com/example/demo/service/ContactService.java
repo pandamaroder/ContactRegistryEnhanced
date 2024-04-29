@@ -17,7 +17,7 @@ public class ContactService {
         return contactDAO.findAll();
     }
 
-    public void createContact(Contact contact) {
-        contactDAO.insert(contact);
+    public long createContact(Contact contact) {
+        return contactDAO.insert(contact);
     }
 }

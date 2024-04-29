@@ -10,7 +10,7 @@ public interface ContactDAO {
     List<Contact> findByName(String title);
 
     // CRUD
-    Integer insert(Contact Contact);
+    long insert(Contact Contact);
     void update(Contact Contact);
     void delete(int id);
 

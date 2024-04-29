@@ -74,23 +74,22 @@ public class JdbcContactDAO implements ContactDAO {
     }
 
     @Override
-    public Integer insert(Contact contact) {
+    public long insert(Contact contact) {
 
-        /*int id = jdbcTemplate.queryForObject(SQL_INSERT_CONTACT,
-                new Object[] {contact.getFirstName(), contact.getEmail(), contact.getTel()}, Integer.class);
-*/
-        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+        long id = jdbcTemplate.queryForObject(SQL_INSERT_CONTACT,
+                new Object[] {contact.getFirstname(), contact.getEmail(), contact.getTel()}, Long.class);
+
+   /*     SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate) //overengineering
                 .withTableName("contacts")
                 .usingGeneratedKeyColumns("id");
-
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("firstname", contact.getFirstname());
         parameters.put("tel", contact.getTel());
         parameters.put("email", contact.getEmail());
-
-        Number id = jdbcInsert.executeAndReturnKey(parameters);
-
-        return id.intValue();
+        Number id2 = jdbcInsert.executeAndReturnKey(parameters);*/
+         //возвращает кол-во измененных строк
+        //int update = jdbcTemplate.update(SQL_INSERT_CONTACT, contact.getFirstname(), contact.getEmail(), contact.getTel());
+        return id;
 
 
     }

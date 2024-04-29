@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("api/contact")
+@RequestMapping("api/demo")
 @RequiredArgsConstructor
 public class ContactInitialController {
 
 
-
     @GetMapping("/world")
     public String getIndexPage(Model model) {
-        model.addAttribute("input", "!");
+        model.addAttribute("input", "Hello! Im new app");
         return "index";
     }
 
@@ -27,7 +26,7 @@ public class ContactInitialController {
         model.addAttribute("input", name);
         return "index";
     }
-
+    ///?name=example
     @GetMapping("/")
     public String getIndexPage2(Model model, @RequestParam String name) {
         model.addAttribute("input", name);

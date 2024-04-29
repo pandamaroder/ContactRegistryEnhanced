@@ -1,5 +1,9 @@
 databaseChangeLog:
+#  - include:
+#      file: classpath:/db/changelog/sql/schema.sql
+#  - include:
+ #     file: classpath:/db/changelog/sql/contact.sql
   - include:
       file: classpath:/db/changelog/init.yaml
-  #- include:
-   ##   file: classpath:/db/changelog/add_Contact.yaml
+  - include:
+      file: classpath:/db/changelog/add_Contact.yaml
