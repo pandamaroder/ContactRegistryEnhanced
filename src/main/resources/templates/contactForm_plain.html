@@ -36,32 +36,37 @@
     <tfoot>
     <tr>
         <td colspan="7">
-            <!-- Кнопка для удаления выбранных контактов -->
             <button onclick="submitForm()">Удалить выбранный контакт</button>
-            <!-- Кнопка для открытия страницы добавления нового контакта -->
-            <button onclick="openAddContactPage()">Добавить контакт</button>
         </td>
     </tr>
     </tfoot>
 </table>
 
-<!-- Скрипт для перехода на страницу добавления контакта -->
-<script th:inline="javascript">
-    function openAddContactPage() {
-        window.location.href = /*[[@{/api/contact/add_contact_form.html}]]*/ '/add_contact_form.html'; // Переход на страницу для добавления контакта
-    }
+<!-- Форма для добавления нового контакта -->
+<form id="addContactForm" action="/add/contact" method="post">
+    <label>
+        <br>Введите данные нового контакта:<br>
+        <input type="text" maxlength="140" name="first_name" placeholder="Имя">
+        <input type="text" maxlength="140" name="last_name" placeholder="Фамилия">
+        <input type="text" maxlength="140" name="middle_name" placeholder="Отчество">
+        <input type="text" maxlength="140" name="phone" placeholder="Телефон">
+        <input type="text" maxlength="140" name="email" placeholder="Почта">
+    </label>
+    <input type="submit" value="Добавить контакт">
+</form>
 
+<script>
     function submitForm() {
-        var form = document.getElementById('contactForm');
-        var checkboxes = form.querySelectorAll('input[name="selectedContactIds"]:checked');
-        var selectedIds = [];
-        for (var i = 0; i < checkboxes.length; i++) {
-            selectedIds.push(checkboxes[i].value);
-        }
-        form.selectedContactIds.value = selectedIds.join(',');
-        form.action = '/api/contact/delete'; // Установите правильный URL для обработки запроса
-        form.submit();
+    var form = document.getElementById('contactForm');
+    var checkboxes = form.querySelectorAll('input[name="selectedContactIds"]:checked');
+    var selectedIds = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+        selectedIds.push(checkboxes[i].value);
     }
+    form.selectedContactIds.value = selectedIds.join(',');
+    form.action = '/api/contact/delete'; // Установите правильный URL для обработки запроса
+    form.submit();
+}
 </script>
 
 </body>

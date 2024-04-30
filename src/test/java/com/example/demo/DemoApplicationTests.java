@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.model.Contact;
+import com.example.demo.service.ContactService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +14,10 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.List;
+
+import static com.example.demo.DataHelper.getAlphabeticString;
+import static com.example.demo.DataHelper.getNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
@@ -34,6 +40,10 @@ class DemoApplicationTests {
 
    @Autowired
    private ApplicationContext applicationContext;
+   
+   @Autowired
+   private ContactService contactService;
+   
 
    @Test
    void contextLoads() {
@@ -41,4 +51,24 @@ class DemoApplicationTests {
               .hasSizeGreaterThan(10);
 
    }
+
+   @Test
+   void validateAddContact() {
+
+      String firstName = getAlphabeticString(3);
+      String lastName = getAlphabeticString(7);
+      int tel = getNumber(8);
+      String email = getAlphabeticString(7).concat("@test.com");
+      Contact test = new Contact();
+      test.setFirst_name(firstName);
+      test.setLast_name(lastName);
+      test.setPhone(String.valueOf(tel));
+      test.setEmail(email);
+      contactService.createContact(test);
+      List<Contact> allContacts = contactService.getAll();
+      assertThat(allContacts)
+              .isNotEmpty()
+              .hasSize(2);
+   }
+
 }

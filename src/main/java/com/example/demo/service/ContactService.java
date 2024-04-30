@@ -20,4 +20,12 @@ public class ContactService {
     public long createContact(Contact contact) {
         return contactDAO.insert(contact);
     }
+
+    public int deleteContact(Long id) {
+        return contactDAO.delete(id);
+    }
+
+    public String getByIdPrintName(Long id) {
+        return contactDAO.findById(id).getFirst_name();
+    }
 }

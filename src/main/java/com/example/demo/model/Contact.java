@@ -8,17 +8,19 @@ import java.io.Serializable;
 public class Contact implements Serializable {
 
     private Long id;
-    private String firstname;
-
+    private String first_name;
+    private String last_name;
+    private String middle_name;
+    private String phone;
     private String email;
-    private String tel;
+
 
 
 
     @Override
     public String toString() {
-        return String.format("%-3d %-50s %-4d",
-                getId(), getFirstname(), getTel());
+        return String.format("%-3d %-50s %-4s",
+                getId(), getFirst_name(), getPhone());
     }
 
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Contact Form</title>
+</head>
+<body>
+
+<form id="addContactForm" action="/api/contact/add/contact" method="post">
+    <label>
+        <br>Введите данные нового контакта:<br>
+        <input type="text" maxlength="140" name="first_name" placeholder="Имя">
+        <input type="text" maxlength="140" name="last_name" placeholder="Фамилия">
+        <input type="text" maxlength="140" name="middle_name" placeholder="Отчество">
+        <input type="text" maxlength="140" name="phone" placeholder="Телефон">
+        <input type="text" maxlength="140" name="email" placeholder="Почта">
+    </label>
+    <input type="submit" value="Добавить контакт">
+</form>
+
+</body>
+</html>

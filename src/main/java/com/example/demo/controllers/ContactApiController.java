@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequestMapping("api/contact")
@@ -23,10 +25,26 @@ public class ContactApiController {
         return "contactForm";
     }
 
-    @PostMapping
-    public String sendMessage(Model model, Contact contact) {
+    @PostMapping("/add/contact")
+    public String createContact(Model model, Contact contact) {
         long contactNewId = contactService.createContact(contact);
         log.info("New added contact {}", contactNewId);
+        return getAll(model);
+    }
+
+    @GetMapping("/add_contact_form.html")
+    public String showAddContactForm() {
+        return "add_contact_form"; // Возвращаем имя HTML файла без расширения
+    }
+
+    @PostMapping("/delete")
+    public String deleteContacts(Model model, @RequestParam("selectedContactIds") List<String> ids) {
+        ids.stream()
+                .map(Long::valueOf)
+                .mapToInt(contactService::deleteContact)
+                .forEach(count -> log.info("deleted contact count {}", count));
+
+        // .forEach(count -> log.info("deleted contact count {}", contactService::getByIdPrintName));
         return getAll(model);
     }
 }
