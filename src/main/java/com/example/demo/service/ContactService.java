@@ -25,7 +25,7 @@ public class ContactService {
         return contactDAO.delete(id);
     }
 
-    public String getByIdPrintName(Long id) {
-        return contactDAO.findById(id).getFirst_name();
+    public Contact getById(Long id) {
+        return contactDAO.findById(id);
     }
 }

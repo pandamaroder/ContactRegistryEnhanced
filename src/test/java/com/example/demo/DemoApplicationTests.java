@@ -14,6 +14,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.example.demo.DataHelper.getAlphabeticString;
@@ -53,8 +54,7 @@ class DemoApplicationTests {
    }
 
    @Test
-   void validateAddContact() {
-
+   void validateAddContactCount() {
       String firstName = getAlphabeticString(3);
       String lastName = getAlphabeticString(7);
       int tel = getNumber(8);
@@ -65,6 +65,35 @@ class DemoApplicationTests {
       test.setPhone(String.valueOf(tel));
       test.setEmail(email);
       contactService.createContact(test);
+      List<Contact> allContacts = contactService.getAll();
+      assertThat(allContacts)
+              .isNotEmpty()
+              .hasSize(4);
+   }
+
+   @Test
+   void validateNewContactParameters() {
+      String firstName = getAlphabeticString(3);
+      String lastName = getAlphabeticString(7);
+      int tel = getNumber(8);
+      String email = getAlphabeticString(7).concat("@test.com");
+      Contact test = new Contact();
+      test.setFirst_name(firstName);
+      test.setLast_name(lastName);
+      test.setPhone(String.valueOf(tel));
+      test.setEmail(email);
+      contactService.createContact(test);
+      List<Contact> all = contactService.getAll();
+
+      assertThat(all)
+              .isNotEmpty()
+              .containsOnlyOnceElementsOf(Collections.singletonList(test));;
+
+   }
+
+   @Test
+   void validateDeleteContact() {
+      contactService.deleteContact(1L);
       List<Contact> allContacts = contactService.getAll();
       assertThat(allContacts)
               .isNotEmpty()
