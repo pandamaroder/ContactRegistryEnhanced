@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.model.Contact;
+
 import java.util.Random;
 
 public class DataHelper {
@@ -38,5 +40,10 @@ public class DataHelper {
 
         return random.nextInt((int) Math.pow(10, targetStringLength - 1),
                 (int) Math.pow(10, targetStringLength) - 1);
+    }
+
+
+    public  static Contact.ContactBuilder<?, ?> prepareContact() {
+        return Contact.builder().firstName("Bob").lastName("Dew").email("test@test.com").phone("96564544334");
     }
 }

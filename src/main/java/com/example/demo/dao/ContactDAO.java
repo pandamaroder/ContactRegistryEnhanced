@@ -11,7 +11,7 @@ public interface ContactDAO {
 
     // CRUD
     long insert(Contact Contact);
-    void update(Contact Contact);
+    int update(Contact Contact);
     int delete(Long id);
 
 }

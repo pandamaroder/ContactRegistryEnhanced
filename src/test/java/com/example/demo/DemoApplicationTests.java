@@ -14,11 +14,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.Collections;
 import java.util.List;
 
-import static com.example.demo.DataHelper.getAlphabeticString;
-import static com.example.demo.DataHelper.getNumber;
+import static com.example.demo.DataHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
@@ -59,9 +57,9 @@ class DemoApplicationTests {
       String lastName = getAlphabeticString(7);
       int tel = getNumber(8);
       String email = getAlphabeticString(7).concat("@test.com");
-      Contact test = new Contact();
-      test.setFirst_name(firstName);
-      test.setLast_name(lastName);
+      Contact test = prepareContact().middleName("").build();
+      test.setFirstName(firstName);
+      test.setLastName(lastName);
       test.setPhone(String.valueOf(tel));
       test.setEmail(email);
       contactService.createContact(test);
@@ -73,23 +71,17 @@ class DemoApplicationTests {
 
    @Test
    void validateNewContactParameters() {
-      String firstName = getAlphabeticString(3);
-      String lastName = getAlphabeticString(7);
-      int tel = getNumber(8);
-      String email = getAlphabeticString(7).concat("@test.com");
-      Contact test = new Contact();
-      test.setFirst_name(firstName);
-      test.setLast_name(lastName);
-      test.setPhone(String.valueOf(tel));
-      test.setEmail(email);
-      contactService.createContact(test);
-      List<Contact> all = contactService.getAll();
+       Contact test = prepareContact().build();
+      long contact = contactService.createContact(test);
+      Contact contactbyId = contactService.getById(contact);
 
-      assertThat(all)
-              .isNotEmpty()
-              .containsOnlyOnceElementsOf(Collections.singletonList(test));;
+      assertThat(contactbyId)
+              .usingRecursiveComparison()
+              .ignoringFields("id")
+              .isEqualTo(test);
 
    }
+
 
    @Test
    void validateDeleteContact() {

@@ -4,14 +4,11 @@ import com.example.demo.model.Contact;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class ContactRowMapper implements RowMapper<Contact> {
 
@@ -20,9 +17,9 @@ class ContactRowMapper implements RowMapper<Contact> {
     public Contact mapRow(ResultSet rs, int rowNum) throws SQLException {
         Contact c = new Contact();
         c.setId(rs.getLong("id"));
-        c.setFirst_name(rs.getString("first_name"));
-        c.setLast_name(rs.getString("last_name"));
-        c.setMiddle_name(rs.getString("middle_name"));
+        c.setFirstName(rs.getString("first_name"));
+        c.setLastName(rs.getString("last_name"));
+        c.setMiddleName(rs.getString("middle_name"));
         c.setEmail(rs.getString("email"));
         c.setPhone(rs.getString("phone"));
         return c;
@@ -78,7 +75,7 @@ public class JdbcContactDAO implements ContactDAO {
     public long insert(Contact contact) {
 
         long id = jdbcTemplate.queryForObject(SQL_INSERT_CONTACT,
-                new Object[] {contact.getFirst_name(), contact.getLast_name(), contact.getMiddle_name(), contact.getPhone(), contact.getEmail()}, Long.class);
+                new Object[] {contact.getFirstName(), contact.getLastName(), contact.getMiddleName(), contact.getPhone(), contact.getEmail()}, Long.class);
 
    /*     SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate) //overengineering
                 .withTableName("contacts")
@@ -96,9 +93,9 @@ public class JdbcContactDAO implements ContactDAO {
     }
 
     @Override
-    public void update(Contact contact) {
-        jdbcTemplate.update(SQL_UPDATE_CONTACT,
-                contact.getFirst_name(), contact.getPhone(),
+    public int update(Contact contact) {
+        return jdbcTemplate.update(SQL_UPDATE_CONTACT,
+                contact.getFirstName(), contact.getPhone(),
                 contact.getEmail(), contact.getId());
 
     }

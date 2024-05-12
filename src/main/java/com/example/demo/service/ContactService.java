@@ -25,6 +25,10 @@ public class ContactService {
         return contactDAO.delete(id);
     }
 
+    public int updateContact(Contact contact) {
+        return contactDAO.update(contact);
+    }
+
     public Contact getById(Long id) {
         return contactDAO.findById(id);
     }

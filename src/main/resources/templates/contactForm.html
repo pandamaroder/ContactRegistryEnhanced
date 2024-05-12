@@ -25,9 +25,10 @@
                 <input type="checkbox" th:value="${contact.id}" name="selectedContactIds">
                 <span th:text="${contact.id}"></span>
             </td>
-            <td th:text="${contact.first_name}"></td>
-            <td th:text="${contact.last_name}"></td>
-            <td th:text="${contact.middle_name}"></td>
+
+            <td th:text="${contact.firstName}"></td>
+            <td th:text="${contact.lastName}"></td>
+            <td th:text="${contact.middleName}"></td>
             <td th:text="${contact.phone}"></td>
             <td th:text="${contact.email}"></td>
         </tr>
@@ -40,6 +41,7 @@
             <button onclick="submitForm()">Удалить выбранный контакт</button>
             <!-- Кнопка для открытия страницы добавления нового контакта -->
             <button onclick="openAddContactPage()">Добавить контакт</button>
+            <button onclick="editContact('${contact.id}')">Редактировать</button>
         </td>
     </tr>
     </tfoot>
@@ -62,6 +64,18 @@
         form.action = '/api/contact/delete'; // Установите правильный URL для обработки запроса
         form.submit();
     }
+
+   function openEditContactPage() {
+   var form = document.getElementById('contactForm');
+        var checkboxes = form.querySelectorAll('input[name="selectedContactIds"]:checked');
+        var selectedIds = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+            selectedIds.push(checkboxes[i].value);
+        }
+        form.selectedContactIds.value = selectedIds.join(',');
+              window.location.href = /*[[@{/api/contact/edit_contact_form.html}]]*/ '/edit_contact_form.html'; // Переход на страницу для добавления контакта
+
+}
 </script>
 
 </body>

@@ -43,8 +43,13 @@ public class ContactApiController {
                 .map(Long::valueOf)
                 .mapToInt(contactService::deleteContact)
                 .forEach(count -> log.info("deleted contact count {}", count));
+        return getAll(model);
+    }
 
-        // .forEach(count -> log.info("deleted contact count {}", contactService::getByIdPrintName));
+    @PutMapping("/update")
+    public String updateContact(Model model, @ModelAttribute Contact contact) {
+        int updatedCount = contactService.updateContact(contact);
+        log.info("Updated contact count: {}", updatedCount);
         return getAll(model);
     }
 }
