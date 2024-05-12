@@ -42,7 +42,7 @@ public class JdbcContactDAO implements ContactDAO {
             "INSERT INTO demo.contact (first_name, last_name, middle_name, phone, email) VALUES (?, ?, ?, ?, ?) returning id";
 
     private static final String SQL_UPDATE_CONTACT =
-            "UPDATE demo.contact SET first_name = ?, phone = ?, email = ? WHERE id = ?";
+            "UPDATE demo.contact SET first_name = ?, phone = ?, email = ? WHERE id = ? returning *";
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -94,6 +94,7 @@ public class JdbcContactDAO implements ContactDAO {
 
     @Override
     public int update(Contact contact) {
+        //перечитывание объъекта из бд
         return jdbcTemplate.update(SQL_UPDATE_CONTACT,
                 contact.getFirstName(), contact.getPhone(),
                 contact.getEmail(), contact.getId());
