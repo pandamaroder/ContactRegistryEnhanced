@@ -53,15 +53,7 @@ class DemoApplicationTests {
 
    @Test
    void validateAddContactCount() {
-      String firstName = getAlphabeticString(3);
-      String lastName = getAlphabeticString(7);
-      int tel = getNumber(8);
-      String email = getAlphabeticString(7).concat("@test.com");
-      Contact test = prepareContact().middleName("").build();
-      test.setFirstName(firstName);
-      test.setLastName(lastName);
-      test.setPhone(String.valueOf(tel));
-      test.setEmail(email);
+      Contact test = prepareContact().build();
       contactService.createContact(test);
       List<Contact> allContacts = contactService.getAll();
       assertThat(allContacts)
@@ -71,7 +63,7 @@ class DemoApplicationTests {
 
    @Test
    void validateNewContactParameters() {
-       Contact test = prepareContact().build();
+       Contact test = prepareContact().middleName("Basic").build();
       long contact = contactService.createContact(test);
       Contact contactbyId = contactService.getById(contact);
 
